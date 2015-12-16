@@ -37,7 +37,8 @@ public class Radar
         
         
         //
-        // !!! add code here !!!
+        currentScan = new boolean[rows][cols];
+        accumulator = new int[rows][cols];
         //
         
         
@@ -62,11 +63,31 @@ public class Radar
         //    3. inject noise into the grid
         //    4. update the accumulator 2D array based on the state of the currentScan 2D array
         //    5. increment the numScans instance variable
-        
-        
-        //
-        // !!! add code here !!!
-        //
+        //This first part scans through the whole radar and sets all the blips to false
+        for (int i= 0; i <currentScan.length; i++)
+        {
+           for (int j = 0; j < currentScan[i].length; j++)
+           {
+               currentScan[i][j] = false;
+           }
+        }
+        //This sets the mosnters location and inserts all the fake noise into the radar
+        this.setMonsterLocation(this.monsterLocationRow, this.monsterLocationCol);
+        this.injectNoise();
+        //this loop goes through the radar and scans the blips setting them all to false positives
+        for (int i= 0; i <currentScan.length; i++)
+        {
+           for (int j = 0; j < currentScan[i].length; j++)
+           {
+               if(currentScan[i][j] == true)
+               {
+                   accumulator[i][j] +=1;
+               }
+           }
+        }
+        //this shows how many times the radar has scanned 
+        numScans++;
+       
         
         
     }
@@ -167,9 +188,18 @@ public class Radar
         // as a false positive.
         
         
-        //
-        // !!! add code here !!!
-        //
+        //This loop goes through the radar and locates the real monster and sets its condition to be always 
+        //true
+        for (int i= 0; i <currentScan.length; i++)
+        {
+           for (int j = 0; j < currentScan[i].length; j++)
+           {
+               if(Math.random() <= noiseFraction)
+               {
+                   currentScan[i][j] = true;
+               }
+           }
+        }
         
         
     }

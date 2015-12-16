@@ -7,7 +7,8 @@ public class ArrayListRunner
    {
        ArrayList<String> names = new ArrayList<String>();
        System.out.println(names);
-       names.add("Alice")
-       names.add("Bob")
+       names.add("Alice");
+       names.add("Bob");
+       names.add("connie");
    }
 } 
